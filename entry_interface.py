@@ -57,7 +57,7 @@ rating_value.set(number_list[0])
 #image4
 text_box_item_notes = tk.StringVar(root)
 
-#For pulling data when the submit button is clicked
+#For submitting to the database when the submit button is clicked
 def submit_input():
     name = ent_name.get()
     platform = platform_value.get()
@@ -82,7 +82,6 @@ def submit_input():
     #image3
     #image4
     notes = text_box_item_notes.get("1.0", 'end-1c')
-    
     #Adds data to sqlite database
     conn = sqlite3.connect('game_database.db')
     data_insert_query = '''INSERT INTO Game_Items ( ITEM_NAME, PLATFORM, TYPE, RELEASE_DATE, DEVELOPER, PUBLISHER, GENRE, FORMAT, EDITION, REGION, INCLUDE_GAME, INCLUDE_BOX, INCLUDE_MANUAL, INCLUDE_EXTRAS, CONDITION, COUNT, RATING, NOTES, UNOPENED) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
@@ -167,7 +166,7 @@ label_entries.grid(row=22, column=0, sticky="e", padx="5")
 label_entries = tk.Label (text="Notes")
 label_entries.grid(row=23, column=0, sticky="e", padx="5")
 
-#Entry boxes and OptionMenus in right column
+#Entries, OptionMenus, and Text boxes in right column
 ent_name = tk.Entry(width=28)
 ent_name.insert(0, "Item Name")
 ent_name.grid(row=1, column=1, sticky="w")
@@ -234,8 +233,6 @@ ent_image3.grid (row=21, column=1, sticky="w")
 ent_image4 = tk.Entry(width=28)
 ent_image4.insert (0, "Image 4")
 ent_image4.grid (row=22, column=1, sticky="w")
-
-#Notes box
 text_box_item_notes = tk.Text(wrap="word", width=28, height=5, pady=5)
 text_box_item_notes.grid(row=23, column=1, sticky="w")
 
