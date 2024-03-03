@@ -64,6 +64,7 @@ image4var.set("Drop image file 4 here")
 text_box_item_notes = tk.StringVar(root)
 
 # This function is called, when stuff is dropped into a widget
+# Behavior is not correct yet, I haven't figured this out lol
 def drop(event):
     image1var.set(event.data)
     image2var.set(event.data)
