@@ -1,12 +1,14 @@
 import tkinter as tk
+from tkinter import ttk
 from tkcalendar import DateEntry
 import tkinterDnD
 import sqlite3
 
 root = tkinterDnD.Tk()
 root.title("Game Database Entry Form")
-root.geometry("480x910")
-root.columnconfigure([0, 1], minsize=200)
+root.geometry("530x910")
+root.columnconfigure([0], minsize=150)
+root.columnconfigure([1], minsize=300)
 root.rowconfigure([0, 25], minsize=60)
 root.option_add("*font", "Roboto", 11)
 
@@ -51,11 +53,22 @@ count_value = tk.IntVar(root)
 count_value.set(number_list[0])
 rating_value = tk.IntVar(root)
 rating_value.set(number_list[0])
-#image1
-#image2
-#image3
-#image4
+image1var = tk.StringVar(root)
+image1var.set("Drop image file 1 here")
+image2var = tk.StringVar(root)
+image2var.set("Drop image file 2 here")
+image3var = tk.StringVar(root)
+image3var.set("Drop image file 3 here")
+image4var = tk.StringVar(root)
+image4var.set("Drop image file 4 here")
 text_box_item_notes = tk.StringVar(root)
+
+# This function is called, when stuff is dropped into a widget
+def drop(event):
+    image1var.set(event.data)
+    image2var.set(event.data)
+    image3var.set(event.data)
+    image4var.set(event.data)
 
 #For submitting to the database when the submit button is clicked
 def submit_input():
@@ -167,31 +180,31 @@ label_entries = tk.Label (text="Notes")
 label_entries.grid(row=23, column=0, sticky="e", padx="5")
 
 #Entries, OptionMenus, and Text boxes in right column
-ent_name = tk.Entry(width=28)
+ent_name = tk.Entry(width=40)
 ent_name.insert(0, "Item Name")
 ent_name.grid(row=1, column=1, sticky="w")
 question_menu = tk.OptionMenu(root, platform_value, *platform_list)
 question_menu.grid(row=2, column=1, sticky="w")
 question_menu.config(takefocus=1)
-ent_type = tk.Entry(width=28)
+ent_type = tk.Entry(width=40)
 ent_type.insert (0, "Item Type (game, console, etc.)")
 ent_type.grid(row=3, column=1, sticky="w")
 cal = DateEntry(root, selectmode='day', date_pattern="mm/dd/yyyy")
 cal.bind("<<DateEntrySelected>>")
 cal.grid(row=4, column=1, sticky="w")
-ent_developer = tk.Entry(width=28)
+ent_developer = tk.Entry(width=40)
 ent_developer.insert (0, "Developer Name")
 ent_developer.grid (row=5, column=1, sticky="w")
-ent_publisher = tk.Entry(width=28)
+ent_publisher = tk.Entry(width=40)
 ent_publisher.insert (0, "Publisher Name")
 ent_publisher.grid (row=6, column=1, sticky="w")
-ent_genre = tk.Entry(width=28)
+ent_genre = tk.Entry(width=40)
 ent_genre.insert (0, "Genre")
 ent_genre.grid (row=7, column=1, sticky="w")
-ent_format = tk.Entry(width=28)
+ent_format = tk.Entry(width=40)
 ent_format.insert (0, "Format (cartridge, optical disc, etc.)")
 ent_format.grid (row=8, column=1, sticky="w")
-ent_edition = tk.Entry(width=28)
+ent_edition = tk.Entry(width=40)
 ent_edition.insert (0, "Standard")
 ent_edition.grid (row=9, column=1, sticky="w")
 question_menu = tk.OptionMenu(root, region_value, *region_list)
@@ -221,19 +234,15 @@ question_menu.config(takefocus=1)
 question_menu = tk.OptionMenu(root, rating_value, *number_list)
 question_menu.grid(row=18, column=1, sticky="w")
 question_menu.config(takefocus=1)
-ent_image1 = tk.Entry(width=28)
-ent_image1.insert (0, "Image 1")
-ent_image1.grid (row=19, column=1, sticky="w")
-ent_image2 = tk.Entry(width=28)
-ent_image2.insert (0, "Image 2")
-ent_image2.grid (row=20, column=1, sticky="w")
-ent_image3 = tk.Entry(width=28)
-ent_image3.insert (0, "Image 3")
-ent_image3.grid (row=21, column=1, sticky="w")
-ent_image4 = tk.Entry(width=28)
-ent_image4.insert (0, "Image 4")
-ent_image4.grid (row=22, column=1, sticky="w")
-text_box_item_notes = tk.Text(wrap="word", width=28, height=5, pady=5)
+image1 = ttk.Label(root, ondrop=drop, textvar=image1var, width=40, relief="solid")
+image1.grid (row=19, column=1, sticky="w")
+image2 = ttk.Label(root, ondrop=drop, textvar=image2var, width=40, relief="solid")
+image2.grid (row=20, column=1, sticky="w")
+image3 = ttk.Label(root, ondrop=drop, textvar=image3var, width=40, relief="solid")
+image3.grid (row=21, column=1, sticky="w")
+image4 = ttk.Label(root, ondrop=drop, textvar=image4var, width=40, relief="solid")
+image4.grid (row=22, column=1, sticky="w")
+text_box_item_notes = tk.Text(wrap="word", width=40, height=5, pady=5)
 text_box_item_notes.grid(row=23, column=1, sticky="w")
 
 #Submission button
