@@ -63,8 +63,8 @@ image4var = tk.StringVar(root)
 image4var.set("Drop image file 4 here")
 text_box_item_notes = tk.StringVar(root)
 
-# This function is called, when stuff is dropped into a widget
-# Behavior is not correct yet, I haven't figured this out lol
+#This function is called, when stuff is dropped into a widget
+#Behavior is not correct yet, I haven't figured this out lol
 def drop(event):
     image1var.set(event.data)
     image2var.set(event.data)
@@ -72,6 +72,7 @@ def drop(event):
     image4var.set(event.data)
 
 #For submitting to the database when the submit button is clicked
+#Does not yet submit images to the blob fields, I haven't figured that out yet
 def submit_input():
     name = ent_name.get()
     platform = platform_value.get()
